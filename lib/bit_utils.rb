@@ -15,4 +15,18 @@ end
 
 module BitUtils
 
+  module_function
+
+  [:count, :trailing_zeros].each do |sym|
+    define_method(sym) do |num|
+      case num
+      when Fixnum
+        send :"#{sym}_fixnum", num
+      when Bignum
+        send :"#{sym}_bignum", num
+      else
+        raise TypeError
+      end
+    end
+  end
 end
