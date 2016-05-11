@@ -22,6 +22,7 @@ if RUBY_PLATFORM =~ /java/
   spec.platform      = 'java'
 else
   spec.extensions    = %w[ext/bit_utils/extconf.rb]
+  spec.add_dependency 'backports', '>= 3.6.6'
 end
 
   spec.add_development_dependency 'bundler', '~> 1.11'
