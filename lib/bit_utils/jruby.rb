@@ -10,6 +10,9 @@ module BitUtils
   # @note not intended for direct use.
   #
   module JavaImpl
+  
+    extend self
+  
     def count_fixnum(num)
       raise TypeError unless num.is_a?(::Fixnum)
       count = Java::JavaLang::Long.bitCount(num)

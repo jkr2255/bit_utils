@@ -8,6 +8,9 @@ module BitUtils
   # @note not intended for direct use.
   #
   module PureRuby
+  
+    extend self
+  
     def count_integer(num)
       raise TypeError unless num.is_a?(::Integer)
       return -count_integer(~num) if num < 0
