@@ -18,7 +18,7 @@ module BitUtils
   module_function
 
   [:count, :trailing_zeros].each do |sym|
-    next if method_defined?(sym)
+    next if BitUtils.respond_to?(sym)
     define_method(sym) do |num|
       case num
       when Fixnum
