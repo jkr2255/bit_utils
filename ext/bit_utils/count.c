@@ -13,7 +13,7 @@ static VALUE bitutils_cimpl_count_fixnum_asm(VALUE self, VALUE num){
     long val;
     __asm__ volatile ("POPCNT %1, %0;": "=r"(val): "r"(l_num) : );
     if(l_num < 0) val -= sizeof(long) * CHAR_BIT;
-    return INT2FIX(val);
+    return LONG2FIX(val);
 }
 #define ASM_POPCOUNT 1
 #else
@@ -164,8 +164,10 @@ void register_count(VALUE mod){
     if(ASM_POPCOUNT && have_cpu_popcnt){
         rb_define_method(mod, "count_fixnum", bitutils_cimpl_count_fixnum_asm, 1);
         rb_define_method(mod, "count_bignum", bitutils_cimpl_count_bignum_asm, 1);
+        rb_define_method(mod, "count", bitutils_cimpl_count_bignum_asm, 1);
     }else{
         rb_define_method(mod, "count_fixnum", bitutils_cimpl_count_fixnum, 1);
         rb_define_method(mod, "count_bignum", bitutils_cimpl_count_bignum, 1);
+        rb_define_method(mod, "count", bitutils_cimpl_count_bignum, 1);
     }
 }
