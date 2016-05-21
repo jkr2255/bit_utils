@@ -45,4 +45,6 @@ else
   message "no\n"
 end
 
+have_func('__builtin_ctzl(1)')
+
 create_makefile("bit_utils/bit_utils")

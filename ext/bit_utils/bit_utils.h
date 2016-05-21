@@ -5,6 +5,7 @@
 #include "big_pack.h"
 #include "count.h"
 #include "bignum_in_ulong.h"
+#include "trailing_zeros.h"
 
 VALUE my_popcnt_p(VALUE self);
 
