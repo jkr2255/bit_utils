@@ -100,6 +100,44 @@ describe BitUtils do
         expect(BitUtils.trailing_zeros(num)).to eq cnt
       end
     end
+  end
 
+  describe '#each_bit' do
+    context '(irregular values)' do
+      it 'raises TypeError when non-Integer given' do
+        expect { BitUtils.each_bit('foo') }.to raise_error(TypeError)
+        expect { BitUtils.each_bit(1.8) }.to raise_error(TypeError)
+      end
+
+      it 'raises RangeError when negative value given' do
+        expect { BitUtils.each_bit(-1) }.to raise_error(RangeError)
+        expect { BitUtils.each_bit(-(2**1_000)) }.to raise_error(RangeError)
+      end
+    end
+
+    it 'returns Enumerator if block was not given' do
+      expect(BitUtils.each_bit(0)).to be_a(Enumerator)
+      expect(BitUtils.each_bit(1)).to be_a(Enumerator)
+      expect(BitUtils.each_bit(2**300)).to be_a(Enumerator)
+    end
+
+    it 'yields with bit position' do
+      expect { |b| BitUtils.each_bit(1, &b) }.to yield_with_args(0)
+      expect { |b| BitUtils.each_bit(4, &b) }.to yield_with_args(2)
+      expect { |b| BitUtils.each_bit(1 << 100, &b) }.to yield_with_args(100)
+    end
+
+    it 'yields with all bits' do
+      expect(BitUtils.each_bit(0).to_a).to match_array([])
+      expect(BitUtils.each_bit(1).to_a).to match_array([0])
+      expect(BitUtils.each_bit(2).to_a).to match_array([1])
+      expect(BitUtils.each_bit(3).to_a).to match_array([0, 1])
+      expect(BitUtils.each_bit(0x3fff_ffff).to_a).to match_array([*0..29])
+      expect(BitUtils.each_bit(0x4000_0000).to_a).to match_array([30])
+      expect(BitUtils.each_bit(0x3fff_ffff_ffff_ffff).to_a).to match_array([*0..61])
+      expect(BitUtils.each_bit(0x4000_0000_0000_0000).to_a).to match_array([62])
+      expect(BitUtils.each_bit((1 << 10_000) - 1).to_a).to match_array([*0..9_999])
+      expect(BitUtils.each_bit(1 << 10_000).to_a).to match_array([10_000])
+    end
   end
 end

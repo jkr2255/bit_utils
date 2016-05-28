@@ -30,6 +30,24 @@ module BitUtils
 
     alias trailing_zeros_fixnum trailing_zeros_integer
     alias trailing_zeros_bignum trailing_zeros_integer
+
+    def each_bit_integer(num)
+      raise TypeError unless num.is_a?(::Integer)
+      raise RangeError if num < 0
+      return enum_for(__method__, num) { BitUtils.count(num) } unless block_given?
+      shift = 0
+      loop do
+        return if num == 0
+        pos = BitUtils.trailing_zeros num
+        yield shift + pos
+        num >>= pos + 1
+        shift += pos + 1
+      end
+    end
+
+    alias each_bit_fixnum each_bit_integer
+    alias each_bit_bignum each_bit_integer
+
   end
 
   extend PureRuby

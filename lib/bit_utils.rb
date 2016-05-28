@@ -17,14 +17,14 @@ module BitUtils
 
   module_function
 
-  [:count, :trailing_zeros].each do |sym|
+  [:count, :trailing_zeros, :each_bit].each do |sym|
     next if BitUtils.respond_to?(sym)
-    define_method(sym) do |num|
+    define_method sym, -> (num, &b) do
       case num
       when Fixnum
-        send :"#{sym}_fixnum", num
+        send :"#{sym}_fixnum", num, &b
       when Bignum
-        send :"#{sym}_bignum", num
+        send :"#{sym}_bignum", num, &b
       else
         raise TypeError
       end
