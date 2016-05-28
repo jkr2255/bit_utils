@@ -58,10 +58,15 @@ static VALUE bitutils_cimpl_count_bignum(VALUE self, VALUE num){
 
 #if defined(HAVE_POPCNT_GCC_ASM) && defined(HAVE_POPCNT_LL_GCC_ASM) && (SIZEOF_LONG_LONG == SIZEOF_LONG * 2)
 /* for Windows */
+union ull_punning{
+    unsigned long long ull;
+    unsigned long ul[2];
+};
+
 static VALUE bitutils_cimpl_count_bignum_asm(VALUE self, VALUE num){
     int negated = 0;
     unsigned long * packed;
-    unsigned long long * ull_packed;
+    union ull_punning * ull_packed;
     unsigned long long ull_o = 0, ull_o2 = 0;
     unsigned long long ull_i, ull_i2;
     VALUE abs_num;
@@ -85,10 +90,10 @@ static VALUE bitutils_cimpl_count_bignum_asm(VALUE self, VALUE num){
     }
     BIG_PACK(abs_num, packed, words);
     ull_dwords = words / 4;
-    ull_packed = (unsigned long long *) packed;
+    ull_packed = (union ull_punning *) packed;
     for(i = 0; i < ull_dwords * 2; i += 2){
-        ull_i = ull_packed[i];
-        ull_i2 = ull_packed[i+1];
+        ull_i = ull_packed[i].ull;
+        ull_i2 = ull_packed[i+1].ull;
         __asm__ volatile ("POPCNT %1, %0;": "=r"(ull_o): "r"(ull_i) : );
         __asm__ volatile ("POPCNT %1, %0;": "=r"(ull_o2): "r"(ull_i2) : );
         ret += ull_o;
