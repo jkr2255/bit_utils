@@ -1,4 +1,4 @@
-#include "bit_utils.h"
+#include "count.h"
 
 static VALUE bitutils_cimpl_count_fixnum(VALUE self, VALUE num){
     long l_num = NUM2LONG(num);

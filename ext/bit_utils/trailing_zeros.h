@@ -1,7 +1,9 @@
 #ifndef TRAILING_ZEROS_H
 #define TRAILING_ZEROS_H 1
 
+#include "ruby.h"
 #include "count.h"
+#include "funcs.h"
 
 void register_trailing_zeros(VALUE mod);
 

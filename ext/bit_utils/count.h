@@ -1,6 +1,9 @@
 #ifndef COUNT_H_INCLUDED
 #define COUNT_H_INCLUDED 1
 
+#include "ruby.h"
+#include "funcs.h"
+
 #ifdef HAVE___BUILTIN_POPCOUNTL
 #define POPCOUNTL(x) __builtin_popcountl(x)
 #else
@@ -15,10 +18,6 @@ int my_popcountl(unsigned long x);
 #endif
 
 #define ALLOCA_THRESHOLD (1024 / sizeof(unsigned long))
-
-#ifdef HAVE_CPUID_H
-#include <cpuid.h>
-#endif
 
 void register_count(VALUE mod);
 

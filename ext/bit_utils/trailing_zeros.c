@@ -1,4 +1,4 @@
-#include "bit_utils.h"
+#include "trailing_zeros.h"
 
 static VALUE bitutils_cimpl_trailing_zeros_fixnum(VALUE self, VALUE num){
     // using only bit pattern

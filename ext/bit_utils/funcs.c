@@ -1,4 +1,4 @@
-#include "bit_utils.h"
+#include "funcs.h"
 
 #if SIZEOF_LONG == 8
 int my_popcountl(unsigned long x){
