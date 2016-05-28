@@ -12,4 +12,5 @@ Init_bit_utils(void)
   rb_extend_object(rb_mBitUtils, rb_mCImpl);
   register_count(rb_mCImpl);
   register_trailing_zeros(rb_mCImpl);
+  register_each_bit(rb_mCImpl);
 }

@@ -5,5 +5,6 @@
 #include "count.h"
 #include "trailing_zeros.h"
 #include "funcs.h"
+#include "each_bit.h"
 
 #endif /* BIT_UTILS_H */
