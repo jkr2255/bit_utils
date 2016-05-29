@@ -10,9 +10,20 @@ module BitUtils
   # @note not intended for direct use.
   #
   module JavaImpl
-  
+
     extend self
-  
+
+    def count(num)
+      case num
+      when Fixnum
+        count_fixnum num
+      when Bignum
+        count_bignum num
+      else
+        raise TypeError
+      end
+    end
+
     def count_fixnum(num)
       raise TypeError unless num.is_a?(::Fixnum)
       count = Java::JavaLang::Long.bitCount(num)
@@ -24,6 +35,18 @@ module BitUtils
       count = num.to_java.bitCount
       num >= 0 ? count : -count
     end
+
+    def trailing_zeros(num)
+      case num
+      when Fixnum
+        trailing_zeros_fixnum num
+      when Bignum
+        trailing_zeros_bignum num
+      else
+        raise TypeError
+      end
+    end
+
 
     def trailing_zeros_fixnum(num)
       raise TypeError unless num.is_a?(::Fixnum)

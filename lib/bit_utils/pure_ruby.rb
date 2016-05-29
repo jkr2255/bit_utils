@@ -11,27 +11,27 @@ module BitUtils
 
     extend self
 
-    def count_integer(num)
+    def count(num)
       raise TypeError unless num.is_a?(::Integer)
       return -count_integer(~num) if num < 0
       # puts 'pure ruby'
       num.to_s(2).count('1')
     end
 
-    alias count_fixnum count_integer
-    alias count_bignum count_integer
+    alias count_fixnum count
+    alias count_bignum count
 
-    def trailing_zeros_integer(num)
+    def trailing_zeros(num)
       raise TypeError unless num.is_a?(::Integer)
       return -1 if num == 0
       # puts 'pure ruby'
       (num & -num).bit_length - 1
     end
 
-    alias trailing_zeros_fixnum trailing_zeros_integer
-    alias trailing_zeros_bignum trailing_zeros_integer
+    alias trailing_zeros_fixnum trailing_zeros
+    alias trailing_zeros_bignum trailing_zeros
 
-    def each_bit_integer(num)
+    def each_bit(num)
       raise TypeError unless num.is_a?(::Integer)
       raise RangeError if num < 0
       return enum_for(__method__, num) { BitUtils.count(num) } unless block_given?
@@ -45,8 +45,8 @@ module BitUtils
       end
     end
 
-    alias each_bit_fixnum each_bit_integer
-    alias each_bit_bignum each_bit_integer
+    alias each_bit_fixnum each_bit
+    alias each_bit_bignum each_bit
 
   end
 
