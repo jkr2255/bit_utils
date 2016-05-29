@@ -1,17 +1,19 @@
 #include "trailing_zeros.h"
 
+#define VAL_CTZL(n) INT2FIX((n) ? CTZL(n) : -1)
+
 static VALUE bitutils_cimpl_trailing_zeros_fixnum(VALUE self, VALUE num){
     // using only bit pattern
-    unsigned long l_num = (unsigned long) NUM2LONG(num);
-    if(l_num == 0) return INT2FIX(-1);
-    return INT2FIX(CTZL(l_num));
+    unsigned long ul_num = (unsigned long) NUM2LONG(num);
+    return VAL_CTZL(ul_num);
 }
 
 static VALUE bitutils_cimpl_trailing_zeros_bignum(VALUE self, VALUE num){
     unsigned long * packed;
     size_t words, i, ret;
     if(FIXNUM_P(num)){
-        return bitutils_cimpl_trailing_zeros_fixnum(self, num);
+        unsigned long ul_num = (unsigned long) FIX2LONG(num);
+        return VAL_CTZL(ul_num);
     }
     Check_Type(num, T_BIGNUM);
     if(rb_big_cmp(num, INT2FIX(0)) == 0) return INT2FIX(-1);
