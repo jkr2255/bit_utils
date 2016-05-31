@@ -13,24 +13,24 @@ module BitUtils
 
     extend self
 
-    def count(num)
+    def popcount(num)
       case num
       when Fixnum
-        count_fixnum num
+        popcount_fixnum num
       when Bignum
-        count_bignum num
+        popcount_bignum num
       else
         raise TypeError
       end
     end
 
-    def count_fixnum(num)
+    def popcount_fixnum(num)
       raise TypeError unless num.is_a?(::Fixnum)
       count = Java::JavaLang::Long.bitCount(num)
       num >= 0 ? count : count - 64
     end
 
-    def count_bignum(num)
+    def popcount_bignum(num)
       raise TypeError unless num.is_a?(::Bignum)
       count = num.to_java.bitCount
       num >= 0 ? count : -count

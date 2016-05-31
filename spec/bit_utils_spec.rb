@@ -5,15 +5,15 @@ describe BitUtils do
     expect(BitUtils::VERSION).not_to be nil
   end
 
-  describe '#count' do
+  describe '#popcount' do
     it 'is a module function' do
-      expect(BitUtils.methods).to include(:count)
-      expect(BitUtils.singleton_methods).to include(:count)
+      expect(BitUtils.methods).to include(:popcount)
+      expect(BitUtils.singleton_methods).to include(:popcount)
     end
 
     it 'raises TypeError if other than Integer was passed' do
-      expect { BitUtils.count(2.0) }.to raise_error(TypeError)
-      expect { BitUtils.count(nil) }.to raise_error(TypeError)
+      expect { BitUtils.popcount(2.0) }.to raise_error(TypeError)
+      expect { BitUtils.popcount(nil) }.to raise_error(TypeError)
     end
 
     expecteds = {
@@ -48,7 +48,7 @@ describe BitUtils do
 
     expecteds.each_pair do |num, cnt|
       it "returns #{cnt} when #{num} is given" do
-        expect(BitUtils.count(num)).to eq cnt
+        expect(BitUtils.popcount(num)).to eq cnt
       end
     end
   end

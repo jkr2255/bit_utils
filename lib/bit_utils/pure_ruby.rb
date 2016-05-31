@@ -11,15 +11,15 @@ module BitUtils
 
     extend self
 
-    def count(num)
+    def popcount(num)
       raise TypeError unless num.is_a?(::Integer)
       return -count_integer(~num) if num < 0
       # puts 'pure ruby'
       num.to_s(2).count('1')
     end
 
-    alias count_fixnum count
-    alias count_bignum count
+    alias popcount_fixnum popcount
+    alias popcount_bignum popcount
 
     def trailing_zeros(num)
       raise TypeError unless num.is_a?(::Integer)
