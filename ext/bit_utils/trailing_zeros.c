@@ -33,7 +33,7 @@ static VALUE bitutils_cimpl_trailing_zeros_bignum(VALUE self, VALUE num){
 }
 
 void register_trailing_zeros(VALUE mod){
-    rb_define_method(mod, "trailing_zeros_fixnum", bitutils_cimpl_trailing_zeros_fixnum, 1);
-    rb_define_method(mod, "trailing_zeros_bignum", bitutils_cimpl_trailing_zeros_bignum, 1);
-    rb_define_method(mod, "trailing_zeros", bitutils_cimpl_trailing_zeros_bignum, 1);
+    rb_define_module_function(mod, "trailing_zeros_fixnum", bitutils_cimpl_trailing_zeros_fixnum, 1);
+    rb_define_module_function(mod, "trailing_zeros_bignum", bitutils_cimpl_trailing_zeros_bignum, 1);
+    rb_define_module_function(mod, "trailing_zeros", bitutils_cimpl_trailing_zeros_bignum, 1);
 }

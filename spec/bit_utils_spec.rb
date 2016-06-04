@@ -7,7 +7,7 @@ describe BitUtils do
 
   describe '#popcount' do
     it 'is a module function' do
-      expect(BitUtils.methods).to include(:popcount)
+      expect(BitUtils.private_instance_methods).to include(:popcount)
       expect(BitUtils.singleton_methods).to include(:popcount)
     end
 
@@ -55,7 +55,7 @@ describe BitUtils do
 
   describe '#trailing_zeros' do
     it 'is a module function' do
-      expect(BitUtils.methods).to include(:trailing_zeros)
+      expect(BitUtils.private_instance_methods).to include(:trailing_zeros)
       expect(BitUtils.singleton_methods).to include(:trailing_zeros)
     end
 

@@ -76,7 +76,7 @@ static VALUE bitutils_cimpl_each_bit_bignum(VALUE self, VALUE num){
 }
 
 void register_each_bit(VALUE mod){
-    rb_define_method(mod, "each_bit_fixnum", bitutils_cimpl_each_bit_fixnum, 1);
-    rb_define_method(mod, "each_bit_bignum", bitutils_cimpl_each_bit_bignum, 1);
-    rb_define_method(mod, "each_bit", bitutils_cimpl_each_bit_bignum, 1);
+    rb_define_module_function(mod, "each_bit_fixnum", bitutils_cimpl_each_bit_fixnum, 1);
+    rb_define_module_function(mod, "each_bit_bignum", bitutils_cimpl_each_bit_bignum, 1);
+    rb_define_module_function(mod, "each_bit", bitutils_cimpl_each_bit_bignum, 1);
 }

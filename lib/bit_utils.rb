@@ -1,4 +1,5 @@
 require 'bit_utils/version'
+require 'function_module'
 
 require 'bit_utils/pure_ruby'
 
@@ -8,7 +9,5 @@ if RUBY_PLATFORM =~ /java/
 else
   require 'backports/2.1.0/fixnum/bit_length'
   require 'backports/2.1.0/bignum/bit_length'
-  require 'bit_utils/bit_utils'
-  # require 'bit_utils/cruby'
+  require 'bit_utils/cruby'
 end
-

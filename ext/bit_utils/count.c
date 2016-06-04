@@ -167,12 +167,12 @@ void register_count(VALUE mod){
     VALUE have_cpu_popcnt;
     have_cpu_popcnt = my_popcnt_p(mod);
     if(ASM_POPCOUNT && have_cpu_popcnt){
-        rb_define_method(mod, "popcount_fixnum", bitutils_cimpl_count_fixnum_asm, 1);
-        rb_define_method(mod, "popcount_bignum", bitutils_cimpl_count_bignum_asm, 1);
-        rb_define_method(mod, "popcount", bitutils_cimpl_count_bignum_asm, 1);
+        rb_define_module_function(mod, "popcount_fixnum", bitutils_cimpl_count_fixnum_asm, 1);
+        rb_define_module_function(mod, "popcount_bignum", bitutils_cimpl_count_bignum_asm, 1);
+        rb_define_module_function(mod, "popcount", bitutils_cimpl_count_bignum_asm, 1);
     }else{
-        rb_define_method(mod, "popcount_fixnum", bitutils_cimpl_count_fixnum, 1);
-        rb_define_method(mod, "popcount_bignum", bitutils_cimpl_count_bignum, 1);
-        rb_define_method(mod, "popcount", bitutils_cimpl_count_bignum, 1);
+        rb_define_module_function(mod, "popcount_fixnum", bitutils_cimpl_count_fixnum, 1);
+        rb_define_module_function(mod, "popcount_bignum", bitutils_cimpl_count_bignum, 1);
+        rb_define_module_function(mod, "popcount", bitutils_cimpl_count_bignum, 1);
     }
 }

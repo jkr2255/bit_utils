@@ -19,6 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib]
   spec.required_ruby_version = '>= 1.9.3'
 
+  spec.add_dependency 'function_module', '>= 0.1.1'
+
 if RUBY_PLATFORM =~ /java/
   spec.platform      = 'java'
 else

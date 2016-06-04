@@ -1,3 +1,5 @@
+require 'function_module'
+
 #
 # module for bit utilities
 #
@@ -9,27 +11,25 @@ module BitUtils
   #
   module PureRuby
 
-    extend self
+    module_function
 
     def popcount(num)
       raise TypeError unless num.is_a?(::Integer)
-      return -count_integer(~num) if num < 0
-      # puts 'pure ruby'
+      return -popcount(~num) if num < 0
       num.to_s(2).count('1')
     end
 
-    alias popcount_fixnum popcount
-    alias popcount_bignum popcount
+    alias_module_function :popcount_fixnum, :popcount
+    alias_module_function :popcount_bignum, :popcount
 
     def trailing_zeros(num)
       raise TypeError unless num.is_a?(::Integer)
       return -1 if num == 0
-      # puts 'pure ruby'
       (num & -num).bit_length - 1
     end
 
-    alias trailing_zeros_fixnum trailing_zeros
-    alias trailing_zeros_bignum trailing_zeros
+    alias_module_function :trailing_zeros_fixnum, :trailing_zeros
+    alias_module_function :trailing_zeros_bignum, :trailing_zeros
 
     def each_bit(num)
       raise TypeError unless num.is_a?(::Integer)
@@ -45,10 +45,10 @@ module BitUtils
       end
     end
 
-    alias each_bit_fixnum each_bit
-    alias each_bit_bignum each_bit
+    alias_module_function :each_bit_fixnum, :each_bit
+    alias_module_function :each_bit_bignum, :each_bit
 
   end
 
-  extend PureRuby
+  include_module_functions PureRuby
 end

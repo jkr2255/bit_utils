@@ -1,4 +1,5 @@
 require 'java'
+require 'function_module'
 
 #
 # module for bit utilities
@@ -11,7 +12,7 @@ module BitUtils
   #
   module JavaImpl
 
-    extend self
+    module_function
 
     def popcount(num)
       case num
@@ -60,6 +61,6 @@ module BitUtils
     end
   end
 
-  extend JavaImpl
+  include_module_functions JavaImpl
 
 end
