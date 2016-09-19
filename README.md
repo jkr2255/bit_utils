@@ -53,7 +53,8 @@ If negative `num` is given, it raises `RangeError`
 ### common to all functionalities
 All of the module functions raise `TypeError` unless the parameter is `Integer`.
 
-All module functions have `.#xxx_fixnum` and `.#xxx_bignum` (specific for `Fixnum` and `Bignum`), but these are not intended for direct use.
+All module functions have `.#xxx_fixnum` and `.#xxx_bignum` (specific for `Fixnum` and `Bignum`), but these are not intended for direct use;
+these will be removed in the future..
 
 
 ## Development
