@@ -1,15 +1,19 @@
 require 'bit_utils'
 
-# Core Extension for Fixnum
-class Fixnum
+# Core Extension for Integer
+class Integer
   def trailing_zeros
-    BitUtils.trailing_zeros_fixnum self
+    BitUtils.trailing_zeros self
   end
 end
 
-# Core Extension for Bignum
-class Bignum
-  def trailing_zeros
-    BitUtils.trailing_zeros_bignum self
+unless BitUtils::INTEGER_UNITED
+
+  # Core Extension for Fixnum
+  class Fixnum
+    def trailing_zeros
+      BitUtils.trailing_zeros_fixnum self
+    end
   end
+
 end
